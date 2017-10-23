@@ -445,6 +445,19 @@ public class SegmentAnalytics implements Analytics {
         trackSegmentEvent(Events.CREATE_ACCOUNT_CLICKED, aEvent.properties);
     }
 
+    @Override
+    public void trackRegistrationSuccess(String appVersion, String source) {
+        SegmentEvent aEvent = new SegmentEvent();
+        aEvent.properties.putValue(Keys.NAME, Values.USER_REGISTRATION_SUCCESS);
+        if (!TextUtils.isEmpty(source)) {
+            aEvent.properties.putValue(Keys.PROVIDER, source);
+        }
+
+        //Add category for Google Analytics
+        aEvent.properties = addCategoryToBiEvents(aEvent.properties, Values.CONVERSION, appVersion);
+        trackSegmentEvent(Events.REGISTRATION_SUCCESS, aEvent.properties);
+    }
+
     /**
      * This function is used to track if user clicks on Enroll in the FindCourses Activity
      *
@@ -456,11 +469,23 @@ public class SegmentAnalytics implements Analytics {
         SegmentEvent aEvent = new SegmentEvent();
         aEvent.data.putValue(Keys.COURSE_ID, courseId);
         aEvent.data.putValue(Keys.EMAIL_OPT_IN, email_opt_in);
-        aEvent.properties.putValue(Keys.NAME, Values.USER_COURSE_ENROLL);
+        aEvent.properties.putValue(Keys.NAME, Values.USER_COURSE_ENROLL_CLICKED);
 
         //Add category for Google Analytics
         aEvent.properties = addCategoryToBiEvents(aEvent.properties, Values.CONVERSION, courseId);
-        trackSegmentEvent(Events.ENROLL_COURSES, aEvent.properties);
+        trackSegmentEvent(Events.ENROLL_COURSE_CLICKED, aEvent.properties);
+    }
+
+    @Override
+    public void trackEnrollSuccess(String courseId, boolean emailOptIn) {
+        SegmentEvent aEvent = new SegmentEvent();
+        aEvent.data.putValue(Keys.COURSE_ID, courseId);
+        aEvent.data.putValue(Keys.EMAIL_OPT_IN, emailOptIn);
+        aEvent.properties.putValue(Keys.NAME, Values.USER_COURSE_ENROLL_SUCCESS);
+
+        //Add category for Google Analytics
+        aEvent.properties = addCategoryToBiEvents(aEvent.properties, Values.CONVERSION, courseId);
+        trackSegmentEvent(Events.ENROLL_COURSE_SUCCESS, aEvent.properties);
     }
 
     //Tracking methods introduced by BNOTIONS

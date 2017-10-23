@@ -270,11 +270,36 @@ public class FirebaseAnalytics implements Analytics {
     }
 
     @Override
+    public void trackRegistrationSuccess(String appVersion, String source) {
+        final FirebaseEvent event = new FirebaseEvent(Events.REGISTRATION_SUCCESS,
+                Values.USER_REGISTRATION_SUCCESS);
+        if (!TextUtils.isEmpty(source)) {
+            event.putString(Keys.PROVIDER, source);
+        }
+
+        //Add category for Google Analytics
+        event.addCategoryToBiEvents(Values.CONVERSION, appVersion);
+        logFirebaseEvent(event.getName(), event.getBundle());
+    }
+
+    @Override
     public void trackEnrollClicked(String courseId, boolean email_opt_in) {
-        final FirebaseEvent event = new FirebaseEvent(Events.ENROLL_COURSES,
-                Values.USER_COURSE_ENROLL);
+        final FirebaseEvent event = new FirebaseEvent(Events.ENROLL_COURSE_CLICKED,
+                Values.USER_COURSE_ENROLL_CLICKED);
         event.putCourseId(courseId);
         event.putBoolean(Keys.EMAIL_OPT_IN, email_opt_in);
+
+        //Add category for Google Analytics
+        event.addCategoryToBiEvents(Values.CONVERSION, courseId);
+        logFirebaseEvent(event.getName(), event.getBundle());
+    }
+
+    @Override
+    public void trackEnrollSuccess(String courseId, boolean emailOptIn) {
+        final FirebaseEvent event = new FirebaseEvent(Events.ENROLL_COURSE_SUCCESS,
+                Values.USER_COURSE_ENROLL_SUCCESS);
+        event.putCourseId(courseId);
+        event.putBoolean(Keys.EMAIL_OPT_IN, emailOptIn);
 
         //Add category for Google Analytics
         event.addCategoryToBiEvents(Values.CONVERSION, courseId);
