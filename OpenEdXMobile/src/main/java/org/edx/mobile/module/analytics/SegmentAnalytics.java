@@ -435,7 +435,7 @@ public class SegmentAnalytics implements Analytics {
     @Override
     public void trackCreateAccountClicked(String appVersion, String source) {
         SegmentEvent aEvent = new SegmentEvent();
-        aEvent.properties.putValue(Keys.NAME, Values.CREATE_ACCOUNT_CLICK);
+        aEvent.properties.putValue(Keys.NAME, Values.CREATE_ACCOUNT_CLICKED);
         if (!TextUtils.isEmpty(source))
             aEvent.properties.putValue(Keys.PROVIDER, source);
 
@@ -473,7 +473,7 @@ public class SegmentAnalytics implements Analytics {
 
         //Add category for Google Analytics
         aEvent.properties = addCategoryToBiEvents(aEvent.properties, Values.CONVERSION, courseId);
-        trackSegmentEvent(Events.ENROLL_COURSE_CLICKED, aEvent.properties);
+        trackSegmentEvent(Events.COURSE_ENROLL_CLICKED, aEvent.properties);
     }
 
     @Override
@@ -485,7 +485,7 @@ public class SegmentAnalytics implements Analytics {
 
         //Add category for Google Analytics
         aEvent.properties = addCategoryToBiEvents(aEvent.properties, Values.CONVERSION, courseId);
-        trackSegmentEvent(Events.ENROLL_COURSE_SUCCESS, aEvent.properties);
+        trackSegmentEvent(Events.COURSE_ENROLL_SUCCESS, aEvent.properties);
     }
 
     //Tracking methods introduced by BNOTIONS

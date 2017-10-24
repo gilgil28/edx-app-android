@@ -420,7 +420,7 @@ public interface Analytics {
         String DISCOVER_COURSES_CLICK = "edx.bi.app.discover.courses.tapped";
         String EXPLORE_SUBJECTS_CLICK = "edx.bi.app.discover.explore.tapped";
         String USER_FIND_COURSES = "edx.bi.app.search.find_courses.clicked";
-        String CREATE_ACCOUNT_CLICK = "edx.bi.app.user.register.clicked";
+        String CREATE_ACCOUNT_CLICKED = "edx.bi.app.user.register.clicked";
         String USER_REGISTRATION_SUCCESS = "edx.bi.app.user.register.success";
         String USER_COURSE_ENROLL_CLICKED = "edx.bi.app.course.enroll.clicked";
         String USER_COURSE_ENROLL_SUCCESS = "edx.bi.app.course.enroll.success";
@@ -538,8 +538,8 @@ public interface Analytics {
         String FIND_COURSES = "Find Courses Clicked";
         String CREATE_ACCOUNT_CLICKED = "Create Account Clicked";
         String REGISTRATION_SUCCESS = "Registration Success";
-        String ENROLL_COURSE_CLICKED = "Course Enroll Clicked";
-        String ENROLL_COURSE_SUCCESS = "Course Enroll Success";
+        String COURSE_ENROLL_CLICKED = "Course Enroll Clicked";
+        String COURSE_ENROLL_SUCCESS = "Course Enroll Success";
         String DISCOVER_COURSES = "Discover Courses";
         String EXPLORE_SUBJECTS = "Explore Subjects";
         String SPEED = "Connected Speed Report";

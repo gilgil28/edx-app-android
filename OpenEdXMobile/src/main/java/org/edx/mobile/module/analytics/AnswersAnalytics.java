@@ -131,7 +131,7 @@ public class AnswersAnalytics implements Analytics {
     @Override
     public void trackCreateAccountClicked(String appVersion, String source) {
         final AnswersEvent event = new AnswersEvent(Events.CREATE_ACCOUNT_CLICKED);
-        event.putCustomAttribute(Keys.NAME, Values.CREATE_ACCOUNT_CLICK);
+        event.putCustomAttribute(Keys.NAME, Values.CREATE_ACCOUNT_CLICKED);
         if (!TextUtils.isEmpty(source)) {
             event.putCustomAttribute(Keys.PROVIDER, source);
         }
@@ -156,7 +156,7 @@ public class AnswersAnalytics implements Analytics {
 
     @Override
     public void trackEnrollClicked(String courseId, boolean emailOptIn) {
-        final AnswersEvent event = new AnswersEvent(Events.ENROLL_COURSE_CLICKED);
+        final AnswersEvent event = new AnswersEvent(Events.COURSE_ENROLL_CLICKED);
         event.putCustomAttribute(Keys.NAME, Values.USER_COURSE_ENROLL_CLICKED)
                 .putCustomAttribute(Analytics.Keys.COURSE_ID, courseId)
                 .putCustomAttribute(Keys.EMAIL_OPT_IN, emailOptIn ? 1 : 0)
@@ -168,7 +168,7 @@ public class AnswersAnalytics implements Analytics {
 
     @Override
     public void trackEnrollSuccess(String courseId, boolean emailOptIn) {
-        final AnswersEvent event = new AnswersEvent(Events.ENROLL_COURSE_SUCCESS);
+        final AnswersEvent event = new AnswersEvent(Events.COURSE_ENROLL_SUCCESS);
         event.putCustomAttribute(Keys.NAME, Values.USER_COURSE_ENROLL_SUCCESS)
                 .putCustomAttribute(Analytics.Keys.COURSE_ID, courseId)
                 .putCustomAttribute(Keys.EMAIL_OPT_IN, emailOptIn ? 1 : 0)
