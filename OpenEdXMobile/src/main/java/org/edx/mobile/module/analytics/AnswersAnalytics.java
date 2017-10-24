@@ -12,6 +12,9 @@ import org.edx.mobile.util.images.ShareUtils;
 
 import java.util.Map;
 
+/**
+ * A concrete implementation of {@link Analytics} to report all the screens and events to Answers.
+ */
 @Singleton
 public class AnswersAnalytics implements Analytics {
     private static final Logger logger = new Logger(AnswersAnalytics.class.getName());

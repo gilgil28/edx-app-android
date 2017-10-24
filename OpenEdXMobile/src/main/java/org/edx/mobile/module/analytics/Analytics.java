@@ -195,20 +195,35 @@ public interface Analytics {
     void trackUserFindsCourses();
 
     /**
-     * This function is used to track if user clicks on Create Account on registration screen
+     * Track if user clicks on Create Account button on Registration screen.
+     *
+     * @param appVersion Version of app.
+     * @param source     Source through which the user is going to register.
      */
     void trackCreateAccountClicked(String appVersion, String source);
 
+    /**
+     * Track successful registration of a user.
+     *
+     * @param appVersion Version of app.
+     * @param source     Source through which the user has completed registration.
+     */
     void trackRegistrationSuccess(String appVersion, String source);
 
     /**
-     * This function is used to track if user clicks on Enroll in the FindCourses Activity
+     * Track if user clicks on Enroll in the FindCourses Activity.
      *
-     * @param courseId   - Course Id for which user selected enroll
-     * @param emailOptIn - Flag to show user wants to opt in for email notification
+     * @param courseId   Id of course for which user is going to enroll.
+     * @param emailOptIn Flag to represent if user wants to opt in for email notification.
      */
     void trackEnrollClicked(String courseId, boolean emailOptIn);
 
+    /**
+     * Track if user has successfully enrolled in the course.
+     *
+     * @param courseId   Id of course which user has enrolled in.
+     * @param emailOptIn Flag to represent if user wants to opt in for email notification.
+     */
     void trackEnrollSuccess(String courseId, boolean emailOptIn);
 
     void trackNotificationReceived(@Nullable String courseId);

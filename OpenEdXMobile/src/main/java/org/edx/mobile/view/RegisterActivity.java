@@ -296,11 +296,11 @@ public class RegisterActivity extends BaseFragmentActivity
 
         //set parameter required by social registration
         final String access_token = loginPrefs.getSocialLoginAccessToken();
-        final String backstore = loginPrefs.getSocialLoginProvider();
+        final String provider = loginPrefs.getSocialLoginProvider();
         boolean fromSocialNet = !TextUtils.isEmpty(access_token);
         if (fromSocialNet) {
             parameters.putString("access_token", access_token);
-            parameters.putString("provider", backstore);
+            parameters.putString("provider", provider);
             parameters.putString("client_id", environment.getConfig().getOAuthClientId());
         }
 
@@ -309,17 +309,17 @@ public class RegisterActivity extends BaseFragmentActivity
             return;
         }
 
-        //Send app version in create event
+        // Send analytics event for Create Account button click
         final String appVersion = String.format("%s v%s", getString(R.string.android), BuildConfig.VERSION_NAME);
-        environment.getAnalyticsRegistry().trackCreateAccountClicked(appVersion, backstore);
+        environment.getAnalyticsRegistry().trackCreateAccountClicked(appVersion, provider);
 
         showProgress();
 
-        final SocialFactory.SOCIAL_SOURCE_TYPE backsourceType = SocialFactory.SOCIAL_SOURCE_TYPE.fromString(backstore);
+        final SocialFactory.SOCIAL_SOURCE_TYPE backsourceType = SocialFactory.SOCIAL_SOURCE_TYPE.fromString(provider);
         final RegisterTask task = new RegisterTask(this, parameters, access_token, backsourceType) {
             @Override
             public void onSuccess(AuthResponse auth) {
-                environment.getAnalyticsRegistry().trackRegistrationSuccess(appVersion, backstore);
+                environment.getAnalyticsRegistry().trackRegistrationSuccess(appVersion, provider);
                 onUserLoginSuccess(auth.profile);
             }
 
