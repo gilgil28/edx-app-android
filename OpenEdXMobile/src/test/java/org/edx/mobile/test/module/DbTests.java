@@ -1246,56 +1246,6 @@ public class DbTests extends BaseTestCase {
     }
 
     @Test
-    public void testgetDownloadedVideoCountByCourse() throws Exception {
-        db.clearDataByUser(username);
-        String courseId = "courseId";
-        db.getDownloadedVideoCountByCourse(courseId,
-                new DataCallback<Integer>() {
-
-            @Override
-            public void onResult(Integer result) {
-                assertNotNull(result);
-                //assertTrue(result >= 0);
-                assertTrue(result==0);
-                print("Result for get Downloaded Video Count ByCourse is:"+ result.toString());
-                unlock();
-
-            }
-
-            @Override
-            public void onFail(Exception ex) {
-
-                fail(ex.getMessage());
-            }
-        });
-        lock();
-        DownloadEntry de=getDummyVideoModel();
-        de.eid=courseId;
-        de.downloaded=DownloadedState.DOWNLOADED;
-
-        db.addVideoData(de, null);
-        db.getDownloadedVideoCountByCourse(courseId,
-                new DataCallback<Integer>() {
-
-            @Override
-            public void onResult(Integer result) {
-                assertNotNull(result);
-                assertTrue(result == 1);
-                print("Result for get Downloaded Video Count ByCourse is:"+ result.toString());
-                unlock();
-
-            }
-
-            @Override
-            public void onFail(Exception ex) {
-
-                fail(ex.getMessage());
-            }
-        });
-        lock();
-    }
-
-    @Test
     public void testgetDownloadedVideosSizeByCourse() throws Exception {
         db.clearDataByUser(username);
         String courseId = "courseId";
@@ -1692,53 +1642,7 @@ public class DbTests extends BaseTestCase {
 
         lock();
     }
-    @Test
-    public void testgetDownloadedVideoListForCourse() throws Exception {
-        db.clearDataByUser(username);
-        String courseId="courseId";
-        db.getDownloadedVideoListForCourse(courseId, new DataCallback<List<VideoModel>>() {
 
-            @Override
-            public void onResult(List<VideoModel> result) {
-                assertNotNull(result);
-                assertTrue(result.isEmpty());
-                print( "Result for getDownloadedVideoListForCourse for size 0 is" + result);
-                unlock();
-            }
-
-            @Override
-            public void onFail(Exception ex) {
-
-                fail(ex.getMessage());              }
-        });
-        lock();
-        DownloadEntry de=getDummyVideoModel();
-        de.eid ="courseid"; // inactive video
-        de.downloaded = DownloadedState.DOWNLOADED;
-        db.addVideoData(de, null);
-
-        db.getDownloadedVideoListForCourse(de.eid, new DataCallback<List<VideoModel>>() {
-
-            @Override
-            public void onResult(List<VideoModel> result) {
-                assertNotNull(result);
-                assertTrue("result size = " + result.size(), result.size() == 1);
-                print( "Result for getAllDeactivatedVideos for size 1 is" + result.toString());
-
-                unlock();
-            }
-
-            @Override
-            public void onFail(Exception ex) {
-
-                fail(ex.getMessage());
-
-            }
-        });
-
-        lock();
-
-    }
     @Test
     public void testgetDownloadedStateForVideoId() throws Exception {
         db.clearDataByUser(username);
